@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0b0710; /* Deep romantic dark purple/black */
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden; /* Scroll handled by R3F ScrollControls */
+  overscroll-behavior: none;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6, .serif {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.glow-text {
+  text-shadow: 0 0 15px rgba(255, 182, 193, 0.6), 0 0 30px rgba(216, 150, 255, 0.4);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ffc8d2, #e0aaff, #fff0f5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.html-story-container {
+  pointer-events: none; /* Let clicks pass to canvas unless explicitly over a button */
+  width: 100vw;
+  height: 100vh;
+}
+
+.story-section {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.blow-button {
+  pointer-events: auto;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(255, 182, 193, 0.2);
+}
+
+.blow-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 30px rgba(255, 182, 193, 0.5);
+  transform: scale(1.05);
+}
+
+.candle-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 200, 100, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
