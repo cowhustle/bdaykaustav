@@ -9,8 +9,8 @@ body, html {
   padding: 0;
   width: 100%;
   height: 100%;
-  background-color: #0b0710; /* Deep romantic dark purple/black */
-  color: #fff;
+  background-color: #fff0f5; /* Soft, warm pink for girl's room */
+  color: #4a4a4a;
   font-family: 'Montserrat', sans-serif;
   overflow: hidden; /* Scroll handled by R3F ScrollControls */
   overscroll-behavior: none;
@@ -27,21 +27,22 @@ h1, h2, h3, h4, h5, h6, .serif {
 }
 
 .glass-panel {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
   padding: 2rem;
-  box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.02);
+  box-shadow: 0 10px 40px 0 rgba(255, 182, 193, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.5);
+  color: #5d3a5a;
 }
 
 .glow-text {
-  text-shadow: 0 0 15px rgba(255, 182, 193, 0.6), 0 0 30px rgba(216, 150, 255, 0.4);
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #ffc8d2, #e0aaff, #fff0f5);
+  background: linear-gradient(135deg, #ff69b4, #d896ff, #ffb6c1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -66,9 +67,9 @@ h1, h2, h3, h4, h5, h6, .serif {
 .blow-button {
   pointer-events: auto;
   margin-top: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: white;
+  background: rgba(255, 105, 180, 0.1);
+  border: 1px solid rgba(255, 105, 180, 0.4);
+  color: #ff69b4;
   padding: 1rem 2.5rem;
   border-radius: 50px;
   font-family: 'Montserrat', sans-serif;
@@ -83,9 +84,9 @@ h1, h2, h3, h4, h5, h6, .serif {
 }
 
 .blow-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 0 30px rgba(255, 182, 193, 0.5);
+  background: rgba(255, 105, 180, 0.2);
+  border-color: rgba(255, 105, 180, 0.8);
+  box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
   transform: scale(1.05);
 }
 
@@ -96,4 +97,119 @@ h1, h2, h3, h4, h5, h6, .serif {
   background: radial-gradient(circle at center, rgba(255, 200, 100, 0.1) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+}
+
+/* Ribbon Intro Styles */
+.ribbon-container {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  justify-content: center; alignItems: center;
+  background-color: #fff0f5;
+  z-index: 100;
+  transition: opacity 1s ease;
+}
+
+.ribbon-container.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ribbon-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  color: #ff69b4;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.ribbon-track {
+  position: relative;
+  width: 80%;
+  max-width: 400px;
+  height: 60px;
+  margin: 0 auto;
+  touch-action: none; /* Prevent scroll while dragging */
+}
+
+.ribbon-line {
+  position: absolute;
+  top: 50%;
+  height: 16px;
+  background: linear-gradient(to bottom, #ff1493, #ff69b4);
+  transform: translateY(-50%);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
+  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.ribbon-cut-left {
+  transform: translateY(-50%) rotate(-15deg) translateY(50px);
+  opacity: 0;
+}
+
+.ribbon-cut-right {
+  transform: translateY(-50%) rotate(15deg) translateY(50px);
+  opacity: 0;
+}
+
+.scissor-thumb {
+  position: absolute;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  margin-top: -30px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  z-index: 10;
+}
+
+.scissor-thumb:active {
+  cursor: grabbing;
+}
+
+.scissor-icon {
+  transition: transform 0.2s;
+}
+
+.scissor-cutting {
+  animation: cut-anim 0.3s infinite alternate;
+}
+
+.scissor-hide {
+  opacity: 0;
+  transform: scale(0);
+}
+
+@keyframes cut-anim {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(-20deg) scale(1.1); }
+}
+
+.drag-instruction {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ff69b4;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.pulse-arrow {
+  animation: pulse-right 1.5s infinite;
+}
+
+@keyframes pulse-right {
+  0% { transform: translateX(0); opacity: 0.5; }
+  50% { transform: translateX(10px); opacity: 1; }
+  100% { transform: translateX(0); opacity: 0.5; }
 }

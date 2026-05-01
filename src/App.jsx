@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { ScrollControls, Preload } from '@react-three/drei';
 import Experience from './components/Experience';
 import Overlay from './components/Overlay';
+import RibbonCut from './components/RibbonCut';
 import './index.css';
 
 function App() {
@@ -21,21 +22,7 @@ function App() {
   return (
     <>
       {!hasStarted && (
-        <div style={{
-          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
-          zIndex: 50, display: 'flex', flexDirection: 'column', justifyContent: 'center', 
-          alignItems: 'center', backgroundColor: '#0b0710', color: 'white'
-        }}>
-          <h1 className="serif glow-text" style={{ fontSize: '2rem', marginBottom: '2rem', textAlign: 'center', padding: '0 1rem' }}>
-            A journey through time...
-          </h1>
-          <button 
-            onClick={startExperience}
-            className="blow-button"
-          >
-            Begin
-          </button>
-        </div>
+        <RibbonCut onCut={startExperience} />
       )}
 
       {/* Audio element for background music. 
@@ -49,12 +36,13 @@ function App() {
 
       <Canvas 
         shadows 
-        dpr={[1, 1.5]} 
-        camera={{ position: [0, 0, 5], fov: 45 }}
+        dpr={[1, 1]} 
+        camera={{ position: [0, 0, 15], fov: 45 }}
         gl={{ powerPreference: "high-performance", antialias: false }}
+        performance={{ min: 0.5 }}
       >
-        <color attach="background" args={['#0b0710']} />
-        <fog attach="fog" args={['#0b0710', 5, 15]} />
+        <color attach="background" args={['#fff0f5']} />
+        <fog attach="fog" args={['#fff0f5', 5, 15]} />
         
         <Suspense fallback={null}>
           {hasStarted && (

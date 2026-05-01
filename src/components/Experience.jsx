@@ -1,8 +1,16 @@
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { useScroll, Float, Stars, Sparkles, MeshTransmissionMaterial } from '@react-three/drei';
+import { useScroll, Float, Stars, Sparkles } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
+
+function CinematicIntro() {
+  useFrame((state, delta) => {
+    state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, 5, 2, delta);
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, 0, 2, delta);
+  });
+  return null;
+}
 
 function Cake({ position, candleBlown }) {
   const flameMaterial = useRef();
@@ -21,10 +29,16 @@ function Cake({ position, candleBlown }) {
 
   return (
     <group position={position} ref={cakeGroup}>
+      {/* A fluffy soft rug underneath */}
+      <mesh position={[0, -0.65, 0]} receiveShadow>
+        <cylinderGeometry args={[4, 4, 0.05, 64]} />
+        <meshStandardMaterial color="#ffe4e1" roughness={0.9} />
+      </mesh>
+
       {/* Cake Plate */}
       <mesh position={[0, -0.6, 0]} receiveShadow>
         <cylinderGeometry args={[2.2, 2.5, 0.1, 48]} />
-        <meshStandardMaterial color="#ffffff" metalness={0.8} roughness={0.1} />
+        <meshStandardMaterial color="#ffffff" metalness={0.2} roughness={0.1} />
       </mesh>
 
       {/* Bottom Tier */}
@@ -121,16 +135,17 @@ export default function Experience({ candleBlown }) {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} color="#fff" castShadow />
-      <pointLight position={[-10, -10, -10]} intensity={1.5} color="#e0aaff" />
+      <CinematicIntro />
+      <ambientLight intensity={1.2} color="#ffffff" />
+      <directionalLight position={[10, 15, 10]} intensity={1.5} color="#fffaf0" castShadow shadow-mapSize={[1024, 1024]} />
+      <pointLight position={[-10, 5, -10]} intensity={1} color="#ffb6c1" />
 
-      {/* Magical Atmosphere */}
-      <Sparkles count={150} scale={15} size={4} speed={0.2} color="#ffd700" opacity={0.6} />
-      <Sparkles count={100} scale={15} size={3} speed={0.1} color="#ffb6c1" opacity={0.4} />
+      {/* Magical Atmosphere (Optimized for Mobile) */}
+      <Sparkles count={40} scale={15} size={4} speed={0.2} color="#ff69b4" opacity={0.6} />
+      <Sparkles count={30} scale={15} size={3} speed={0.1} color="#d896ff" opacity={0.4} />
       
-      {/* Soft background stars */}
-      <Stars radius={100} depth={50} count={1200} factor={4} saturation={0} fade speed={0.3} />
+      {/* Soft background stars / dust motes in room */}
+      <Stars radius={100} depth={50} count={300} factor={4} saturation={1} fade speed={0.3} color="#ffb6c1" />
 
       <group ref={group}>
         {/* Premium Floating Glass Orbs */}
@@ -138,22 +153,16 @@ export default function Experience({ candleBlown }) {
           <Float key={i} speed={orb.speed} rotationIntensity={1.5} floatIntensity={1.5}>
             <mesh position={orb.position} scale={orb.scale}>
               <icosahedronGeometry args={[1, 1]} />
-              {/* Premium Glass Material */}
-              <MeshTransmissionMaterial 
-                backside
-                samples={4}
+              {/* Premium Glass Material (Optimized for Mobile) */}
+              <meshPhysicalMaterial 
                 thickness={0.5}
                 roughness={0.1}
                 transmission={1}
                 ior={1.5}
-                chromaticAberration={0.06}
-                anisotropy={0.1}
-                distortion={0.1}
-                distortionScale={0.3}
-                temporalDistortion={0.1}
                 color={orb.color}
                 emissive={orb.color}
                 emissiveIntensity={0.2}
+                transparent
               />
             </mesh>
           </Float>
@@ -170,8 +179,8 @@ export default function Experience({ candleBlown }) {
         <Bloom 
           luminanceThreshold={0.5} 
           luminanceSmoothing={0.9} 
-          intensity={1.5} 
-          mipmapBlur={true} 
+          intensity={1.0} 
+          mipmapBlur={false}
         />
       </EffectComposer>
     </>

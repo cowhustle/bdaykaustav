@@ -100,7 +100,7 @@ export default function Overlay({ candleBlown, setCandleBlown }) {
           <h1 className="glow-text gradient-text" style={{ fontSize: '3.5rem', marginBottom: '1rem', fontFamily: "'Cormorant Garamond', serif" }}>
             Happy Birthday Rimi 🎂
           </h1>
-          <p style={{ fontSize: '1.4rem', fontWeight: 300, marginBottom: '2rem', textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+          <p style={{ fontSize: '1.4rem', fontWeight: 500, color: '#5d3a5a', marginBottom: '2rem', textShadow: '0 0 10px rgba(255,255,255,0.8)' }}>
             You bring so much joy and<br/>positivity to everyone around you.
           </p>
           
@@ -111,10 +111,10 @@ export default function Overlay({ candleBlown, setCandleBlown }) {
               </button>
             ) : (
               <div style={{ animation: 'fadeIn 2s ease forwards' }}>
-                <p style={{ fontSize: '1.3rem', color: '#ffb6c1', fontStyle: 'italic', textShadow: '0 0 10px rgba(255,182,193,0.5)' }}>
+                <p style={{ fontSize: '1.3rem', color: '#ff69b4', fontStyle: 'italic', textShadow: '0 0 10px rgba(255,255,255,0.8)', fontWeight: 500 }}>
                   May all your wishes come true... ✨
                 </p>
-                <p style={{ fontSize: '1.1rem', color: '#e0aaff', marginTop: '1rem', fontStyle: 'italic' }}>
+                <p style={{ fontSize: '1.1rem', color: '#d896ff', marginTop: '1rem', fontStyle: 'italic', fontWeight: 500 }}>
                   ... from Mr. stranger.
                 </p>
               </div>
