@@ -37,12 +37,12 @@ function App() {
       <Canvas 
         shadows 
         dpr={[1, 1]} 
-        camera={{ position: [0, 0, 15], fov: 45 }}
+        camera={{ position: [0, 0, 0.5], fov: 45 }}
         gl={{ powerPreference: "high-performance", antialias: false }}
         performance={{ min: 0.5 }}
       >
         <color attach="background" args={['#fff0f5']} />
-        <fog attach="fog" args={['#fff0f5', 5, 15]} />
+        <fog attach="fog" args={['#fff0f5', 10, 30]} />
         
         <Suspense fallback={null}>
           {hasStarted && (

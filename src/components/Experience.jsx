@@ -6,8 +6,8 @@ import * as THREE from 'three';
 
 function CinematicIntro() {
   useFrame((state, delta) => {
-    state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, 5, 2, delta);
-    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, 0, 2, delta);
+    state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, 7, 1.5, delta);
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, 0, 1.5, delta);
   });
   return null;
 }
@@ -136,6 +136,19 @@ export default function Experience({ candleBlown }) {
   return (
     <>
       <CinematicIntro />
+
+      {/* Visual Room Enclosure */}
+      <mesh position={[0, -20, 0]} receiveShadow>
+        <cylinderGeometry args={[12, 12, 60, 32]} />
+        <meshStandardMaterial color="#ffe4e1" side={THREE.BackSide} roughness={0.7} />
+      </mesh>
+      
+      {/* Base Floor */}
+      <mesh position={[0, -50, 0]} rotation={[-Math.PI/2, 0, 0]} receiveShadow>
+        <circleGeometry args={[12, 32]} />
+        <meshStandardMaterial color="#ffb6c1" roughness={0.9} />
+      </mesh>
+
       <ambientLight intensity={1.2} color="#ffffff" />
       <directionalLight position={[10, 15, 10]} intensity={1.5} color="#fffaf0" castShadow shadow-mapSize={[1024, 1024]} />
       <pointLight position={[-10, 5, -10]} intensity={1} color="#ffb6c1" />
